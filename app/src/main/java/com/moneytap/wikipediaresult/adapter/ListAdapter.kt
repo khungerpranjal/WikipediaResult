@@ -19,14 +19,11 @@ class ListAdapter(dataList : List<Page>, val context: Context):
 
     private val inflater: LayoutInflater
     private val arraylist: List<Page>
-
-
     init {
 
         inflater = LayoutInflater.from(context)
         this.arraylist = dataList
     }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
         val view = inflater.inflate(R.layout.list_item, parent, false)
 
@@ -47,7 +44,7 @@ class ListAdapter(dataList : List<Page>, val context: Context):
             Picasso.get().load(arraylist[position].thumbnail.source).into(holder.iconImg)
         else
             Picasso.get().load(R.drawable.ic_launcher_background).into(holder.iconImg)
-
+        //opening detail view of the selected item in webview
         holder.searcCard.setOnClickListener{
             val url = context.getString(R.string.wikipedia_detail_url) + arraylist[position].title
             val intent = Intent(context, DetailedViewActivity::class.java)

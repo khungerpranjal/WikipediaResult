@@ -15,6 +15,7 @@ class DetailedViewActivity : AppCompatActivity(){
         setContentView(R.layout.detailed_view)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        //getting the url from main activity to open in the web view
         if (intent.extras != null) {
             webview.setWebViewClient(Browser())
             webview.getSettings().setLoadsImagesAutomatically(true)
