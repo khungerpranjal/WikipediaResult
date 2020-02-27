@@ -1,3 +1,11 @@
 <resources>
-    <string name="app_name">Test</string>
+    <string name="app_name">Wikipedia Result</string>
+    <string name="internet_connection_msg">Please check your internet connection</string>
+    <string name="wikipedia_detail_url">https://en.wikipedia.org/wiki/</string>
+    <string name="action_data">query</string>
+    <string name="json_format">json</string>
+    <string name="prop_data_img">pageimages|pageterms</string>
+    <string name="generator_data">prefixsearch</string>
+    <string name="piprop_image_data">thumbnail</string>
+    <string name="terms_data">description</string>
 </resources>

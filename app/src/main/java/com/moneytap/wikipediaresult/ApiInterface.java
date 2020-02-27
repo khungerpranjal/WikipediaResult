@@ -1,11 +1,9 @@
-package com.example.test;
+package com.moneytap.wikipediaresult;
 
-import com.example.test.model.BaseResponse;
+import com.moneytap.wikipediaresult.model.BaseResponse;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.GET;
-import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface ApiInterface {

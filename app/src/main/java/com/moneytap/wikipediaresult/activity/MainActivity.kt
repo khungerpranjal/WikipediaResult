@@ -1,24 +1,22 @@
-package com.example.test
+package com.moneytap.wikipediaresult.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.test.model.BaseResponse
+import com.moneytap.wikipediaresult.api.ApiClient
+import com.moneytap.wikipediaresult.ApiInterface
+import com.moneytap.wikipediaresult.R
+import com.moneytap.wikipediaresult.adapter.ListAdapter
+import com.moneytap.wikipediaresult.model.BaseResponse
 import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
 import retrofit2.Response
 
-class MainActivity : AppCompatActivity(), View.OnClickListener {
-
-    override fun onClick(p0: View?) {
-
-    }
+class MainActivity : AppCompatActivity() {
 
     private var apiInterface: ApiInterface? = null
 
@@ -44,7 +42,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                     rv_data_list.visibility=View.VISIBLE
                     getData(editTextSearch.text.toString())
                 }
-
                 else {
                     rv_data_list.visibility=View.INVISIBLE
                 }
@@ -53,18 +50,24 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 }
 
     fun getData(searchedText:String) {
-        apiInterface!!.getSearchedData("query","json","pageimages|pageterms",
-            "prefixsearch",2,"thumbnail",50,10,
-            "description",searchedText,10).enqueue(object : retrofit2.Callback<BaseResponse> {
+        apiInterface!!.getSearchedData(getString(R.string.action_data),getString(R.string.json_format),getString(
+                    R.string.prop_data_img),
+            getString(R.string.generator_data),2,getString(R.string.piprop_image_data),
+            50,10,getString(R.string.terms_data),searchedText,10)
+            .enqueue(object : retrofit2.Callback<BaseResponse> {
             override fun onFailure(call: Call<BaseResponse>, t: Throwable) {
 
-                Toast.makeText(this@MainActivity,"Please check your internet connection",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@MainActivity,getString(R.string.internet_connection_msg)
+                    ,Toast.LENGTH_SHORT).show()
             }
 
             override fun onResponse(call: Call<BaseResponse>, response: Response<BaseResponse>) {
                 if(response.isSuccessful) {
                     if(response.body()!=null && response.body()?.query!=null) {
-                        rv_data_list?.adapter=ListAdapter(response.body()?.query!!.pages,this@MainActivity)
+                        rv_data_list?.adapter= ListAdapter(
+                            response.body()?.query!!.pages,
+                            this@MainActivity
+                        )
                     }
                     else {
                         rv_data_list.adapter=null
